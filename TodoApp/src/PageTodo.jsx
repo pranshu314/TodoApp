@@ -10,20 +10,34 @@ function PageTodo() {
     title: "Hello2",
     description: "How are you!!!!",
     id: 2
+  },
+  {
+    title: "Hello3",
+    description: "Just for Fun!!!",
+    id: 3
   }])
 
+  // console.log(todos)
   return (
     <center>
       <div className='container mx-auto my-8'>
 
         {todos.map((todo) => {
-          return <div className="text-white">
+          return <div className="text-white" key={todo.id}>
             <div className="text-2xl font-bold">
               Todo{todo.id}
             </div>
             Title: {todo.title} <br />
             Description: {todo.description} <br />
-            <button className="bg-slate-600 my-2 p-1 rounded hover:scale-110">Done</button>
+            <button className="bg-slate-600 my-2 p-1 rounded hover:scale-110" onClick={() => {
+              let newTodos = []
+              for (let i = 0; i < todos.length; i++) {
+                if (todos[i] != todo) {
+                  newTodos.push(todos[i])
+                }
+              }
+              setTodos(newTodos)
+            }}>Done</button>
             <br /> <br />
           </div>
         })}
@@ -35,5 +49,14 @@ function PageTodo() {
     </center>
   )
 }
+
+// function delTodo(id) {
+//   newTodos = todos.map((value) => {
+//     if (value.id != id) {
+//       return value
+//     }
+//   })
+//   setTodos(newTodos)
+// }
 
 export default PageTodo;
