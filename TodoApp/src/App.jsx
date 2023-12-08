@@ -6,23 +6,13 @@ import PageTodo from './PageTodo.jsx'
 import './App.css'
 
 function App() {
-  // const [Todos, setTodos] = useState({})
-  // const [todos, setTodos] = useState([{
-  //   title: "Hello",
-  //   description: "World!!!!",
-  //   id: 1
-  // },
-  // {
-  //   title: "Hello2",
-  //   description: "How are you!!!!",
-  //   id: 2
-  // }])
+  const [todos, setTodos] = useState([])
 
   return (
     <div className='bg-slate-900 h-screen w-screen'>
       <TopBar></TopBar>
-      <AddTodo></AddTodo>
-      <PageTodo></PageTodo>
+      <AddTodo todos={todos} setTodos={setTodos}></AddTodo>
+      <PageTodo todos={todos} setTodos={setTodos}></PageTodo>
       <BottomBar></BottomBar>
     </div>
   )

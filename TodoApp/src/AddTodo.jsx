@@ -2,8 +2,19 @@ import { BsFillPlusCircleFill } from 'react-icons/bs'
 import { IconContext } from "react-icons"
 import { useState } from 'react';
 
-function AddTodo() {
+function AddTodo(props) {
   const [todoModal, setTodoModal] = useState(false)
+  const [title, setTitle] = useState("")
+  const [desc, setDesc] = useState("")
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value)
+  }
+
+  const handleDescChange = (event) => {
+    setDesc(event.target.value)
+  }
+
   return (
     <div className='fixed flex-col right-0 justify-end bottom-0 mb-48 p-8 group sm:mb-96'>
       <IconContext.Provider value={{ size: '2em' }}>
@@ -37,11 +48,11 @@ function AddTodo() {
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
                   <div>Title                                                 </div>
-                  <textarea className='bg-slate-500 w-full'></textarea>
+                  <textarea value={title} onChange={handleTitleChange} className='bg-slate-500 w-full'></textarea>
                   <br />
                   <br />
                   <div>Description</div>
-                  <textarea className='bg-slate-500 w-full h-40'></textarea>
+                  <textarea value={desc} onChange={handleDescChange} className='bg-slate-500 w-full h-40'></textarea>
                   {/* <input className='bg-slate-500'></input> */}
                 </div>
                 {/*footer*/}
@@ -56,7 +67,20 @@ function AddTodo() {
                   <button
                     className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                     type="button"
-                    onClick={() => setTodoModal(false)}
+                    onClick={() => {
+                      let newTodos = props.todos.map((value) => {
+                        return value
+                      })
+                      newTodos.push({
+                        title: title,
+                        description: desc,
+                        id: Math.floor(Math.random() * 10000000)
+                      })
+                      props.setTodos(newTodos)
+                      setTitle("")
+                      setDesc("")
+                      setTodoModal(false)
+                    }}
                   >
                     Add Todo
                   </button>
