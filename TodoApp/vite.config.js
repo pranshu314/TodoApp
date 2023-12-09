@@ -9,6 +9,7 @@ export default defineConfig({
       external: [
         'react-icons',
         'react-icons/bs',
+        'framer-motion',
       ],
     },
   },
